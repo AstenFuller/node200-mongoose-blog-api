@@ -10,9 +10,11 @@ const UserSchema = new Schema({
 
     social: {
         facebook: { type: 'string', required: false },
-        twitter: { type: 'string', required: false },
-        linkedin: { type: 'string', required: false }
-    }
+        linkedIn: { type: 'string', required: false },
+        twitter: { type: 'string', required: false }
+    },
+
+    blogs: [{ type: Schema.Types.ObjectId, ref: 'Blog' }]
 });
 
 module.exports = mongoose.model('User', UserSchema);

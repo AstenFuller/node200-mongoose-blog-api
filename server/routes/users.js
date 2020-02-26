@@ -14,18 +14,18 @@ router.get('/:id', (req, res) => {
     User 
         .findById(req.params.id)
         .then(user => {
+            if(!user) return res.status(404).send('no user found');
             res.status(200).json(user);
         })
         .catch(error => console.log(error));
 });
 
 router.post('/', (req, res) => {
-    const newUser = req.query;
-    
-    User(newUser)
+    console.log(req.body);
+    User(req.body)
         .save()
         .then(user => {
-            res.status(200).json(user);
+            res.status(201).json(user);
         })
         .catch(err => console.log(err));
 });
@@ -33,11 +33,23 @@ router.post('/', (req, res) => {
 router.put('/:id', (req, res) => {
     const updateUser = req.query;
 
-    User(updateUser)
-        findByIdAndUpdate()
+    User
+        .findByIdAndUpdate(req.params.id, updateUser)
         .then(user => {
-            res.status(200).json(user);
+            if(!user) return res.status(404).send('no user found');
+            res.status(204).json(user);
         })
         .catch(err => console.log(err));
 });
+
+router.delete('/:id', (req, res) => {
+    User
+        .findByIdAndDelete(req.params.id)
+        .then(user => {
+            if(!user) return res.status(404).send('no user found');
+            res.status(200).json(user);
+        })
+        .catch(err => console.log(err))
+});
+
 module.exports = router;

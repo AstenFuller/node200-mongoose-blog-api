@@ -21,7 +21,6 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-    console.log(req.body);
     User(req.body)
         .save()
         .then(user => {

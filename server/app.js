@@ -12,7 +12,6 @@ app.use(express.urlencoded());
 app.use(express.json());
 
 app.use('/api/users', require('./routes/users'));
-app.use('/api/users/:id', require('./routes/users'));
 
 app.get('/', (req, res) => {
     res.status(200).send();
